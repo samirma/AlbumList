@@ -3,10 +3,12 @@ package com.samir.albumlist.features.albums.userCases
 import com.samir.albumlist.data.remote.AlbumRemoteRepository
 import com.samir.albumlist.data.remote.model.AlbumPhotoRemote
 import io.mockk.MockKAnnotations
+import io.mockk.Runs
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.impl.annotations.InjectMockKs
 import io.mockk.impl.annotations.MockK
+import io.mockk.just
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
@@ -42,6 +44,7 @@ class FetchAlbumListUseCaseTest {
         coEvery { isOnlineUseCase() } returns flowOf(true)
         coEvery { isDatabasePopulatedUseCase() } returns false
         coEvery { remoteRepository.getAlbums() } returns Result.success(albumList)
+        coEvery { saveAlbums(any()) } just Runs
 
         // When
         victim()
@@ -78,4 +81,3 @@ class FetchAlbumListUseCaseTest {
         coVerify(exactly = 0) { saveAlbums(any()) }
     }
 }
-
