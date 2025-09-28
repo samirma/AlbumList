@@ -44,7 +44,7 @@ fun AlbumsNavigation(
                 is AlbumsUiState.Error -> ErrorState(message = stringResource(id = state.message))
                 is AlbumsUiState.Loaded -> {
                     Column(modifier = Modifier.fillMaxSize()) {
-                        if (state.isOffline) {
+                        if (!state.isOnline) {
                             OfflineBanner()
                         }
                         AlbumListScreen(

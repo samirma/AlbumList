@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 sealed class AlbumsUiState {
     data class Loaded(
         val albums: Flow<PagingData<AlbumItemView>>,
-        val isOffline: Boolean
+        val isOnline: Boolean
     ) : AlbumsUiState()
 
     data class Error(
