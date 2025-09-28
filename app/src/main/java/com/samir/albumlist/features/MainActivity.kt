@@ -8,7 +8,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import com.samir.albumlist.features.albums.AlbumsViewModel
 import com.samir.albumlist.features.albums.ui.AlbumsNavigation
 import com.samir.albumlist.features.common.ui.theme.AlbumListTheme

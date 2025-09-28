@@ -21,3 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "Album list"
 include(":app")
+ 

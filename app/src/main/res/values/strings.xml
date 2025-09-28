@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Album list</string>
+    <string name="error_loading_albums">Error loading albums</string>
+    <string name="an_error_occurred">An error occurred</string>
+    <string name="no_repositories_found">No albums found</string>
+    <string name="something_went_wrong">Something went wrong</string>
+    <string name="you_are_offline_showing_cached_data">You are offline. Showing cached data.</string>
 </resources>
