@@ -25,13 +25,6 @@ class IsOnlineUseCase @Inject constructor(
             override fun onLost(network: Network) {
                 trySend(false)
             }
-
-            override fun onCapabilitiesChanged(
-                network: Network,
-                networkCapabilities: NetworkCapabilities
-            ) {
-                trySend(isNetworkAvailable())
-            }
         }
 
         val networkRequest = NetworkRequest.Builder()

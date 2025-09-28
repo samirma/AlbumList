@@ -9,9 +9,12 @@ class AlbumLocalRepositoryImpl @Inject constructor(
     override fun getPagedAlbums(): PagingSource<Int, AlbumPhotoEntity> {
         return albumDao.getAll()
     }
-    override suspend fun insertAll(entities: List<AlbumPhotoEntity>, shouldClearDataBase: Boolean): Long {
-        if (shouldClearDataBase) albumDao.deleteAll()
+
+    override suspend fun insertAll(entities: List<AlbumPhotoEntity>) {
         albumDao.insertAll(entities)
+    }
+
+    override suspend fun getTotalItems(): Long {
         return albumDao.getTotalItems()
     }
 }

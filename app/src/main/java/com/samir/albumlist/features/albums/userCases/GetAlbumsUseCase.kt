@@ -6,7 +6,6 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.samir.albumlist.data.local.AlbumLocalRepository
 import com.samir.albumlist.data.local.model.AlbumPhotoEntity
-import com.samir.albumlist.data.remote.AlbumRemoteRepository
 import com.samir.albumlist.features.albums.AlbumRemoteMediator
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
@@ -14,8 +13,7 @@ import javax.inject.Inject
 @OptIn(ExperimentalPagingApi::class)
 class GetAlbumsUseCase @Inject constructor(
     private val localRepository: AlbumLocalRepository,
-    private val remoteRepository: AlbumRemoteRepository,
-    private val saveAlbums: SaveAlbumsUseCase,
+    private val mediator: AlbumRemoteMediator,
 ) {
     operator fun invoke(): Flow<PagingData<AlbumPhotoEntity>> {
         return Pager(
@@ -23,10 +21,7 @@ class GetAlbumsUseCase @Inject constructor(
                 pageSize = PAGE_SIZE,
                 enablePlaceholders = false
             ),
-            remoteMediator = AlbumRemoteMediator(
-                saveAlbums = saveAlbums,
-                remoteRepository = remoteRepository,
-            ),
+            remoteMediator = mediator,
             pagingSourceFactory = {
                 localRepository.getPagedAlbums()
             }

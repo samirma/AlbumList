@@ -11,12 +11,10 @@ class SaveAlbumsUseCase @Inject constructor(
     private val localRepository: AlbumLocalRepository,
 ) {
     suspend operator fun invoke(
-        albumList: List<AlbumPhotoRemote>,
-        shouldClearDataBase: Boolean
-    ): Long {
-        return localRepository.insertAll(
-            albumList.map { it.toAlbumPhotoEntity() },
-            shouldClearDataBase
+        albumList: List<AlbumPhotoRemote>
+    ) {
+        localRepository.insertAll(
+            albumList.map { it.toAlbumPhotoEntity() }
         )
     }
 
