@@ -4,16 +4,20 @@ import android.net.ConnectivityManager
 import android.net.Network
 import android.net.NetworkCapabilities
 import android.net.NetworkRequest
+import com.samir.albumlist.di.DefaultDispatcher
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
+import kotlinx.coroutines.flow.flowOn
 import javax.inject.Inject
 
 /**
  * Use case to check if the device is online.
  */
 class IsOnlineUseCase @Inject constructor(
-    private val connectivityManager: ConnectivityManager
+    private val connectivityManager: ConnectivityManager,
+    @DefaultDispatcher private val dispatcher: CoroutineDispatcher
 ) {
 
     operator fun invoke(): Flow<Boolean> = callbackFlow {
@@ -39,7 +43,7 @@ class IsOnlineUseCase @Inject constructor(
         awaitClose {
             connectivityManager.unregisterNetworkCallback(networkCallback)
         }
-    }
+    }.flowOn(dispatcher)
 
     private fun isNetworkAvailable(): Boolean {
         val activeNetwork = connectivityManager.activeNetwork

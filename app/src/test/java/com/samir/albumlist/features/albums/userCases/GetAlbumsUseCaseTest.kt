@@ -11,8 +11,10 @@ import io.mockk.impl.annotations.InjectMockKs
 import io.mockk.impl.annotations.MockK
 import io.mockk.impl.annotations.RelaxedMockK
 import io.mockk.mockk
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertNotNull
 import org.junit.Before
@@ -27,12 +29,15 @@ class GetAlbumsUseCaseTest {
     @RelaxedMockK
     private lateinit var mediator: AlbumRemoteMediator
 
-    @InjectMockKs
     private lateinit var victim: GetAlbumsUseCase
+
+    private lateinit var dispatcher: CoroutineDispatcher
 
     @Before
     fun setUp() {
+        dispatcher = UnconfinedTestDispatcher()
         MockKAnnotations.init(this)
+        victim = GetAlbumsUseCase(localRepository, mediator, dispatcher)
     }
 
     @Test

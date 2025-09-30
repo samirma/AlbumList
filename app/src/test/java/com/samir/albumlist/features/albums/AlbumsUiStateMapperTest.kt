@@ -25,13 +25,26 @@ class AlbumsUiStateMapperTest {
     @Test
     fun `when online and database is populated, should return Loaded state`() = runBlocking {
         // Given
-        val albumsFlow = flowOf(PagingData.from(listOf(AlbumPhotoEntity(1, 1, "title", "url", "thumb"))))
+        val albumsFlow = flowOf(
+            PagingData.from(
+                listOf(
+                    AlbumPhotoEntity(
+                        albumId = 1,
+                        id = 1,
+                        title = "title",
+                        url = "url",
+                        thumbnailUrl = "thumb"
+                    )
+                )
+            )
+        )
 
         // When
         val result = victim(albumsFlow, isOnline = true, isDatabasePopulated = true)
 
         // Then
         assertTrue(result is AlbumsUiState.Loaded)
+        assertEquals(true, (result as AlbumsUiState.Loaded).isOnline)
     }
 
     @Test

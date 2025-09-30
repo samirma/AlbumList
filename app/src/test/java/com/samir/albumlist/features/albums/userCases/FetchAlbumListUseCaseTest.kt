@@ -6,14 +6,16 @@ import io.mockk.MockKAnnotations
 import io.mockk.Runs
 import io.mockk.coEvery
 import io.mockk.coVerify
-import io.mockk.impl.annotations.InjectMockKs
 import io.mockk.impl.annotations.MockK
 import io.mockk.just
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import org.junit.Before
 import org.junit.Test
 
+@OptIn(ExperimentalCoroutinesApi::class)
 class FetchAlbumListUseCaseTest {
 
     @MockK
@@ -28,12 +30,18 @@ class FetchAlbumListUseCaseTest {
     @MockK
     private lateinit var isDatabasePopulatedUseCase: IsDatabasePopulatedUseCase
 
-    @InjectMockKs
     private lateinit var victim: FetchAlbumListUseCase
 
     @Before
     fun setUp() {
         MockKAnnotations.init(this)
+        victim = FetchAlbumListUseCase(
+            saveAlbums,
+            remoteRepository,
+            isOnlineUseCase,
+            isDatabasePopulatedUseCase,
+            UnconfinedTestDispatcher()
+        )
     }
 
     @Test
