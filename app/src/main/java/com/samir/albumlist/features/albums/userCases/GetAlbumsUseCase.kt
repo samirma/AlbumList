@@ -31,6 +31,7 @@ class GetAlbumsUseCase @Inject constructor(
             }
         ).flow.flowOn(dispatcher)
     }
+
     companion object {
         const val PAGE_SIZE = 50
     }

@@ -1,4 +1,5 @@
 package com.samir.albumlist.features.albums
+
 import androidx.annotation.StringRes
 import androidx.paging.PagingData
 import com.samir.albumlist.features.albums.ui.AlbumItemView

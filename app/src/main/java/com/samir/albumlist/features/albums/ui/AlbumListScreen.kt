@@ -29,9 +29,11 @@ fun AlbumListScreen(
         when (val loadState = albumItems.loadState.refresh) {
             is LoadState.Loading -> LoadingState()
             is LoadState.Error -> {
-                val message = loadState.error.localizedMessage ?: stringResource(R.string.an_error_occurred)
+                val message =
+                    loadState.error.localizedMessage ?: stringResource(R.string.an_error_occurred)
                 ErrorState(message = message)
             }
+
             else -> {
                 LazyVerticalGrid(
                     columns = GridCells.Fixed(2),
@@ -40,7 +42,9 @@ fun AlbumListScreen(
                     verticalArrangement = Arrangement.spacedBy(12.dp),
                     horizontalArrangement = Arrangement.spacedBy(12.dp)
                 ) {
-                    items(albumItems.itemCount, key = { index -> albumItems[index]?.id ?: index }) { index ->
+                    items(
+                        albumItems.itemCount,
+                        key = { index -> albumItems[index]?.id ?: index }) { index ->
                         albumItems[index]?.let { album ->
                             AlbumItem(
                                 album = album,

@@ -65,7 +65,8 @@ class AlbumsViewModelTest {
         coEvery { mapper(any(), isOnline = true, isDatabasePopulated = true) } returns loadedState
 
         // When
-        victim = AlbumsViewModel(getAlbumsUseCase, isOnlineUseCase, isDatabasePopulatedUseCase, mapper)
+        victim =
+            AlbumsViewModel(getAlbumsUseCase, isOnlineUseCase, isDatabasePopulatedUseCase, mapper)
 
         // Then
         victim.uiState.test {
@@ -85,7 +86,8 @@ class AlbumsViewModelTest {
         coEvery { isDatabasePopulatedUseCase() } returns true
 
         // When
-        victim = AlbumsViewModel(getAlbumsUseCase, isOnlineUseCase, isDatabasePopulatedUseCase, mapper)
+        victim =
+            AlbumsViewModel(getAlbumsUseCase, isOnlineUseCase, isDatabasePopulatedUseCase, mapper)
 
         // Then
         victim.uiState.test {
@@ -106,7 +108,8 @@ class AlbumsViewModelTest {
         coEvery { mapper(any(), isOnline = false, isDatabasePopulated = false) } returns errorState
 
         // When
-        victim = AlbumsViewModel(getAlbumsUseCase, isOnlineUseCase, isDatabasePopulatedUseCase, mapper)
+        victim =
+            AlbumsViewModel(getAlbumsUseCase, isOnlineUseCase, isDatabasePopulatedUseCase, mapper)
 
         // Then
         victim.uiState.test {

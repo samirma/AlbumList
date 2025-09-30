@@ -1,4 +1,5 @@
 package com.samir.albumlist.data.local
+
 import androidx.paging.PagingSource
 import com.samir.albumlist.data.local.model.AlbumPhotoEntity
 import javax.inject.Inject

@@ -1,4 +1,5 @@
 package com.samir.albumlist.features.albums.ui
+
 import androidx.compose.runtime.Stable
 
 @Stable
