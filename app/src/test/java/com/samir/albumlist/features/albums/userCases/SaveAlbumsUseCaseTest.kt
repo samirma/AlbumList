@@ -6,9 +6,9 @@ import io.mockk.MockKAnnotations
 import io.mockk.Runs
 import io.mockk.coEvery
 import io.mockk.coVerify
+import io.mockk.impl.annotations.InjectMockKs
 import io.mockk.impl.annotations.MockK
 import io.mockk.just
-import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
@@ -23,11 +23,10 @@ class SaveAlbumsUseCaseTest {
 
     private lateinit var victim: SaveAlbumsUseCase
 
-    private lateinit var dispatcher: CoroutineDispatcher
+    private val dispatcher = UnconfinedTestDispatcher()
 
     @Before
     fun setUp() {
-        dispatcher = UnconfinedTestDispatcher()
         MockKAnnotations.init(this)
         victim = SaveAlbumsUseCase(albumLocalRepository, dispatcher)
     }

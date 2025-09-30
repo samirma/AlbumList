@@ -3,6 +3,7 @@ package com.samir.albumlist.features.albums.userCases
 import com.samir.albumlist.data.local.AlbumLocalRepository
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
+import io.mockk.impl.annotations.InjectMockKs
 import io.mockk.impl.annotations.MockK
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -19,15 +20,14 @@ class IsDatabasePopulatedUseCaseTest {
     @MockK
     private lateinit var localRepository: AlbumLocalRepository
 
-    private lateinit var victim: IsDatabasePopulatedUseCase
+    private val dispatcher = UnconfinedTestDispatcher()
 
-    private lateinit var dispatcher: CoroutineDispatcher
+    @InjectMockKs
+    private lateinit var victim: IsDatabasePopulatedUseCase
 
     @Before
     fun setUp() {
-        dispatcher = UnconfinedTestDispatcher()
         MockKAnnotations.init(this)
-        victim = IsDatabasePopulatedUseCase(localRepository, dispatcher)
     }
 
     @Test

@@ -29,13 +29,13 @@ class GetAlbumsUseCaseTest {
     @RelaxedMockK
     private lateinit var mediator: AlbumRemoteMediator
 
-    private lateinit var victim: GetAlbumsUseCase
+    private val dispatcher = UnconfinedTestDispatcher()
 
-    private lateinit var dispatcher: CoroutineDispatcher
+    @InjectMockKs
+    private lateinit var victim: GetAlbumsUseCase
 
     @Before
     fun setUp() {
-        dispatcher = UnconfinedTestDispatcher()
         MockKAnnotations.init(this)
         victim = GetAlbumsUseCase(localRepository, mediator, dispatcher)
     }
