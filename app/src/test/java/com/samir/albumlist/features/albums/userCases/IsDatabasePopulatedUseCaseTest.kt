@@ -5,10 +5,9 @@ import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.impl.annotations.InjectMockKs
 import io.mockk.impl.annotations.MockK
-import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
+import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Before
@@ -31,7 +30,7 @@ class IsDatabasePopulatedUseCaseTest {
     }
 
     @Test
-    fun `invoke returns true when database is populated`() = runBlocking {
+    fun `invoke returns true when database is populated`() = runTest {
         // Given
         coEvery { localRepository.getTotalItems() } returns 1
 
@@ -43,7 +42,7 @@ class IsDatabasePopulatedUseCaseTest {
     }
 
     @Test
-    fun `invoke returns false when database is not populated`() = runBlocking {
+    fun `invoke returns false when database is not populated`() = runTest {
         // Given
         coEvery { localRepository.getTotalItems() } returns 0
 

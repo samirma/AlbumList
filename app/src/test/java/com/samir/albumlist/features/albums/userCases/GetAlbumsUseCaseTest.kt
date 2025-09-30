@@ -11,9 +11,7 @@ import io.mockk.impl.annotations.InjectMockKs
 import io.mockk.impl.annotations.MockK
 import io.mockk.impl.annotations.RelaxedMockK
 import io.mockk.mockk
-import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertNotNull
@@ -50,7 +48,7 @@ class GetAlbumsUseCaseTest {
         val result = victim.invoke()
 
         // Then
-        result.test{
+        result.test {
             val item = awaitItem()
             assertNotNull(item)
         }

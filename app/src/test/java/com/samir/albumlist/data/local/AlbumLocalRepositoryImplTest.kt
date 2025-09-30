@@ -10,7 +10,7 @@ import io.mockk.impl.annotations.InjectMockKs
 import io.mockk.impl.annotations.MockK
 import io.mockk.just
 import io.mockk.mockk
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
@@ -42,7 +42,7 @@ class AlbumLocalRepositoryImplTest {
     }
 
     @Test
-    fun `insertAll inserts albums`() = runBlocking {
+    fun `insertAll inserts albums`() = runTest {
         // Given
         val albumPhotoEntity =
             AlbumPhotoEntity(1, 1, "title", "url", "thumbnailUrl")
@@ -58,7 +58,7 @@ class AlbumLocalRepositoryImplTest {
     }
 
     @Test
-    fun `getTotalItems returns total count`() = runBlocking {
+    fun `getTotalItems returns total count`() = runTest {
         // Given
         val totalItems = 1L
         coEvery { albumDao.getTotalItems() } returns totalItems

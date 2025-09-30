@@ -11,8 +11,8 @@ import io.mockk.impl.annotations.MockK
 import io.mockk.just
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
+import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Test
 
@@ -42,7 +42,7 @@ class FetchAlbumListUseCaseTest {
     }
 
     @Test
-    fun `invoke fetches and saves albums when online and database is not populated`() = runBlocking {
+    fun `invoke fetches and saves albums when online and database is not populated`() = runTest {
         // Given
         val albumPhotoRemote = AlbumPhotoRemote(1, 1, "title", "url", "thumbnailUrl")
         val albumList = listOf(albumPhotoRemote)
@@ -59,7 +59,7 @@ class FetchAlbumListUseCaseTest {
     }
 
     @Test
-    fun `invoke does not fetch and save albums when offline`() = runBlocking {
+    fun `invoke does not fetch and save albums when offline`() = runTest {
         // Given
         coEvery { isOnlineUseCase() } returns flowOf(false)
         coEvery { isDatabasePopulatedUseCase() } returns false
@@ -73,7 +73,7 @@ class FetchAlbumListUseCaseTest {
     }
 
     @Test
-    fun `invoke does not fetch and save albums when database is populated`() = runBlocking {
+    fun `invoke does not fetch and save albums when database is populated`() = runTest {
         // Given
         coEvery { isOnlineUseCase() } returns flowOf(true)
         coEvery { isDatabasePopulatedUseCase() } returns true

@@ -6,12 +6,11 @@ import io.mockk.MockKAnnotations
 import io.mockk.Runs
 import io.mockk.coEvery
 import io.mockk.coVerify
-import io.mockk.impl.annotations.InjectMockKs
 import io.mockk.impl.annotations.MockK
 import io.mockk.just
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
+import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Test
 
@@ -32,7 +31,7 @@ class SaveAlbumsUseCaseTest {
     }
 
     @Test
-    fun `invoke saves albums`() = runBlocking {
+    fun `invoke saves albums`() = runTest {
         // Given
         val albumPhotoRemote =
             AlbumPhotoRemote(1, 1, "title", "url", "thumbnailUrl")

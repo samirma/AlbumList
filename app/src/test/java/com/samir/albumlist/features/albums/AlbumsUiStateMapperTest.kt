@@ -8,7 +8,7 @@ import io.mockk.impl.annotations.InjectMockKs
 import junit.framework.TestCase.assertEquals
 import junit.framework.TestCase.assertTrue
 import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Test
 
@@ -23,7 +23,7 @@ class AlbumsUiStateMapperTest {
     }
 
     @Test
-    fun `when online and database is populated, should return Loaded state`() = runBlocking {
+    fun `when online and database is populated, should return Loaded state`() = runTest {
         // Given
         val albumsFlow = flowOf(
             PagingData.from(
@@ -48,7 +48,7 @@ class AlbumsUiStateMapperTest {
     }
 
     @Test
-    fun `when offline and database is not populated, should return Error state`() = runBlocking {
+    fun `when offline and database is not populated, should return Error state`() = runTest {
         // Given
         val albumsFlow = flowOf(PagingData.empty<AlbumPhotoEntity>())
 

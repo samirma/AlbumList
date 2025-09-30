@@ -6,7 +6,7 @@ import io.mockk.coEvery
 import io.mockk.impl.annotations.InjectMockKs
 import io.mockk.impl.annotations.MockK
 import junit.framework.TestCase.assertEquals
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.runTest
 import okhttp3.ResponseBody.Companion.toResponseBody
 import org.junit.Before
 import org.junit.Test
@@ -26,7 +26,7 @@ class AlbumRemoteRepositoryImplTest {
     }
 
     @Test
-    fun `getAlbums returns success`() = runBlocking {
+    fun `getAlbums returns success`() = runTest {
         // Given
         val albumPhotoRemote = AlbumPhotoRemote(1, 1, "title", "url", "thumbnailUrl")
         val albumPhotos = listOf(albumPhotoRemote)
@@ -45,7 +45,7 @@ class AlbumRemoteRepositoryImplTest {
     }
 
     @Test
-    fun `getAlbums returns failure`() = runBlocking {
+    fun `getAlbums returns failure`() = runTest {
         // Given
         val errorResponse: Response<List<AlbumPhotoRemote>> =
             Response.error(404, "".toResponseBody(null))
